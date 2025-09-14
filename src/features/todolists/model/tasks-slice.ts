@@ -5,6 +5,7 @@ import { tasksApi } from "@/features/todolists/api/tasksApi.ts"
 import { DomainTask, UpdateTaskModel } from "@/features/todolists/api/tasksApi.types.ts"
 import { TaskStatus } from "@/common/enums"
 import { RootState } from "@/app/store.ts"
+import { changeStatusAC } from "@/app/app-slice.ts"
 //import { TaskStatus } from "@/common/enums"
 //import { RootState } from "@/app/store.ts"
 
@@ -43,10 +44,13 @@ export const tasksSlice = createAppSlice({
     createTaskTC: create.asyncThunk(
       async (args: { todolistId: string; title: string }, thunkAPI) => {
         try {
+          thunkAPI.dispatch(changeStatusAC({ status: "loading" }))
           await new Promise(resolve => setTimeout(resolve, 2000))
           const res = await tasksApi.createTask(args)
+          thunkAPI.dispatch(changeStatusAC({ status: "succeeded" }))
           return res.data.data.item
         } catch (error) {
+          thunkAPI.dispatch(changeStatusAC({ status: "failed" }))
           return thunkAPI.rejectWithValue(null)
         }
       },

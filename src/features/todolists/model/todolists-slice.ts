@@ -2,6 +2,7 @@ import { todolistsApi } from "@/features/todolists/api/todolistsApi"
 import type { Todolist } from "@/features/todolists/api/todolistsApi.types"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { createAppSlice } from "@/common/utils"
+import { changeStatusAC } from "@/app/app-slice.ts"
 
 export const todolistsSlice = createAppSlice({
   name: "todolists",
@@ -42,10 +43,13 @@ export const todolistsSlice = createAppSlice({
     fetchTodolistsTC: create.asyncThunk(
       async (_, thunkAPI) => {
         try {
+          thunkAPI.dispatch(changeStatusAC({ status: "loading" }))
           await new Promise(resolve => setTimeout(resolve, 2000))
           const res = await todolistsApi.getTodolists()
+          thunkAPI.dispatch(changeStatusAC({ status: "succeeded" }))
           return { todolists: res.data }
         } catch (error) {
+          thunkAPI.dispatch(changeStatusAC({ status: "failed" }))
           return thunkAPI.rejectWithValue(null)
         }
       },
