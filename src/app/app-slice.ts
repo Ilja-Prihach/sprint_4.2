@@ -4,6 +4,7 @@ export const appSlice = createSlice({
   name: "app",
   initialState: {
     themeMode: "light" as ThemeMode,
+    status: 'idle' as 'idle' | 'loading' | 'succeeded' | 'failed'
   },
   selectors: {
     selectThemeMode: (state) => state.themeMode,
