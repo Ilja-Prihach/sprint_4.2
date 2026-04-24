@@ -4,7 +4,7 @@
 
 This template provides a minimal setup to get React working in Vite.
 
-## Getting Started
+## Getting   Started
 
 ### 1. Install dependencies:
 
