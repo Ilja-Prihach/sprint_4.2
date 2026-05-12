@@ -12,7 +12,7 @@ This template provides a minimal setup to get React working in Vite.
 pnpm i
 ```
 
-### 2. Start app:
+###  2. Start app:
 
 ```bash
 pnpm dev
