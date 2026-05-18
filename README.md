@@ -6,7 +6,7 @@ This template provides a minimal setup to get React working in Vite.
 
 ## Getting   Started
 
-###  1. Install  dependencies:
+###  1.  Install  dependencies:
 
 ```bash
 pnpm i
